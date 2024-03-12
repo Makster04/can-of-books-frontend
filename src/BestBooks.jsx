@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './BestBooks.css'; // Import the CSS file
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 class BestBooks extends React.Component {
   constructor(props) {
@@ -27,24 +27,24 @@ class BestBooks extends React.Component {
         <h2>My Essential Lifelong Learning & Formation Shelf</h2>
 
         {this.state.books.length > 0 ? (
-          // Render books using Bootstrap carousel
-          <div id="bookCarousel" className="carousel slide" data-bs-ride="carousel">
+          // Render books using Bootstrap carousel with unique styling
+          <div id="bookCarousel" className="carousel slide my-carousel" data-bs-ride="carousel">
             <div className="carousel-inner">
               {this.state.books.map((book, index) => (
                 <div key={index} className={`carousel-item ${index === 0 ? 'active' : ''}`}>
-                  <img src={book.imageUrl} className="d-block w-100" alt={book.title} />
-                  <div className="carousel-caption d-none d-md-block">
+                  <img src={book.imageUrl} className="d-block w-100 my-carousel-image" alt={book.title} />
+                  <div className="carousel-caption my-carousel-caption">
                     <h5>{book.title}</h5>
                     <p>{book.author}</p>
                   </div>
                 </div>
               ))}
             </div>
-            <button className="carousel-control-prev" type="button" data-bs-target="#bookCarousel" data-bs-slide="prev">
+            <button className="carousel-control-prev my-carousel-control" type="button" data-bs-target="#bookCarousel" data-bs-slide="prev">
               <span className="carousel-control-prev-icon" aria-hidden="true"></span>
               <span className="visually-hidden">Previous</span>
             </button>
-            <button className="carousel-control-next" type="button" data-bs-target="#bookCarousel" data-bs-slide="next">
+            <button className="carousel-control-next my-carousel-control" type="button" data-bs-target="#bookCarousel" data-bs-slide="next">
               <span className="carousel-control-next-icon" aria-hidden="true"></span>
               <span className="visually-hidden">Next</span>
             </button>
@@ -62,3 +62,4 @@ class BestBooks extends React.Component {
 }
 
 export default BestBooks;
+
