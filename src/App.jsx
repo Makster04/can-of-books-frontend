@@ -20,10 +20,6 @@ class App extends React.Component {
           <Header />
           <div className="container">
             <Routes>
-              <Route
-                exact path="/books"
-                element={<BestBooks />}
-              />
               <Route 
                 exact path="/about"
                 element={<About />}

@@ -1,6 +1,5 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './BestBooks.css'; // Link BestBooks.css here
 import axios from 'axios';
 import { Carousel } from 'react-bootstrap';
 
@@ -14,7 +13,7 @@ class BestBooks extends React.Component {
   }
 
   componentDidMount() {
-    axios.get('/books')
+    axios.get('http://localhost:3001/books')
       .then(response => {
         this.setState({ 
           books: response.data,
