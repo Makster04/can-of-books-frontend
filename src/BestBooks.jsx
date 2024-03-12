@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import axios from 'axios';
 
 class BestBooks extends React.Component {
   constructor(props) {
@@ -11,12 +12,11 @@ class BestBooks extends React.Component {
   }
 
   componentDidMount() {
-    // Make a GET request to your server's /books route
-    fetch('/books')
-      .then(response => response.json())
-      .then(data => {
+    // Make a GET request to your server's /books route using Axios
+    axios.get('/books')
+      .then(response => {
         // Store the book data returned from the server in the application state
-        this.setState({ books: data });
+        this.setState({ books: response.data });
       })
       .catch(error => console.error('Error fetching books:', error));
   }
@@ -62,4 +62,3 @@ class BestBooks extends React.Component {
 }
 
 export default BestBooks;
-
