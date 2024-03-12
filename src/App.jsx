@@ -4,7 +4,6 @@ import Footer from './Footer';
 import BestBooks from './BestBooks';
 import About from './About';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './App.css'; // Link App.css here
 import {
   BrowserRouter as Router,
   Routes,
@@ -21,7 +20,7 @@ class App extends React.Component {
           <Header />
           <div className="container">
             <Routes>
-              <Route 
+              <Route
                 exact path="/books"
                 element={<BestBooks />}
               />
@@ -30,7 +29,7 @@ class App extends React.Component {
                 element={<About />}
               />
               <Route 
-                exact path="/books"
+                exact path="/"
                 element={<BestBooks />}
               />
             </Routes>
