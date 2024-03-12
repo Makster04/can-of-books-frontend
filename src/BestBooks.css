@@ -1,0 +1,40 @@
+/* BestBooks.css */
+/* Styles specific to the BestBooks component */
+/* Add your unique styles here */
+.carousel-item img {
+    width: 100%;
+    height: auto;
+  }
+  
+  .carousel-caption {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    animation: fadeInUp 1s ease;
+  }
+  
+  .carousel-caption h3 {
+    font-size: 24px;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .carousel-caption p {
+    font-size: 18px;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Animation */
+  @keyframes fadeInUp {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
