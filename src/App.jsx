@@ -11,6 +11,8 @@ import {
   Route
 } from "react-router-dom";
 
+const DATABASE_URL = import.meta.env.DATABASE_URL;
+
 class App extends React.Component {
   render() {
     return (
@@ -20,12 +22,16 @@ class App extends React.Component {
           <div className="container">
             <Routes>
               <Route 
-                exact path="/"
+                exact path="/books"
                 element={<BestBooks />}
               />
               <Route 
                 exact path="/about"
                 element={<About />}
+              />
+              <Route 
+                exact path="/books"
+                element={<BestBooks />}
               />
             </Routes>
           </div>
