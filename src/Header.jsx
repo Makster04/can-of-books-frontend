@@ -1,4 +1,3 @@
-// Header.jsx
 import React from 'react';
 import { Navbar, Nav } from 'react-bootstrap';
 import { Link } from "react-router-dom";
@@ -9,7 +8,7 @@ class Header extends React.Component {
   render() {
     return (
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-        <Navbar.Brand style={{ color: 'whitesmoke' }}>My Favorite Books</Navbar.Brand> {/* Change brand color */}
+        <Navbar.Brand className="navbar-brand-custom">My Favorite Books</Navbar.Brand> {/* Assign the class name */}
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mr-auto">
