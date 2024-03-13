@@ -52,7 +52,7 @@ body {
 }
 
 .book-author {
-    font-size: 24px; /* Decrease font size */
+    font-size: 24px; /* Decreasse font size */
     font-style: normal; /* Reset font style */
     font-weight: bolder; /* Increase font weight */
     font-family: Georgia, 'Times New Roman', Times, serif; /* Use serif font */

@@ -4,6 +4,8 @@ import { Carousel } from 'react-bootstrap';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import './BestBooks.css'; // Import custom CSS file
 
+const SERVER_URL= import.meta.env.VITE_SERVER_URL;
+
 class BestBooks extends React.Component {
   constructor(props) {
     super(props);
@@ -20,7 +22,7 @@ class BestBooks extends React.Component {
   // Function to fetch books data from the server
   fetchBooks = () => {
     axios
-      .get('http://localhost:3001/books')
+      .get(`${SERVER_URL}/books`) // Use template literals to include the SERVER_URL
       .then(response => {
         // Update state with fetched books data and set loading to false
         this.setState({
@@ -29,12 +31,11 @@ class BestBooks extends React.Component {
         });
       })
       .catch(error => console.error('Error fetching books:', error.message));
-  };
-
+};
   // Function to handle deleting a book
   handleDelete = id => {
     axios
-      .delete(`http://localhost:3001/books/${id}`)
+      .delete(`${SERVER_URL}/books/${id}`)
       .then(response => {
         console.log(response.data.message);
         // Update state to remove the deleted book
@@ -48,7 +49,7 @@ class BestBooks extends React.Component {
   // Function to render the books carousel
   renderBooks() {
     const { books, loading } = this.state;
-
+    console.log("RENDERBOOKS METHOD, Books and loading", books, loading);
     if (loading) {
       // Show loading message while fetching books
       return <p>Loading...</p>;
@@ -77,14 +78,22 @@ class BestBooks extends React.Component {
       return <p>Book collection is empty.</p>;
     }
   }
-
   render() {
     return (
       <div className="best-books-container">
         {/* Render section title */}
         <h2 className="section-title">Best Books</h2>
-        {/* Render the books carousel */}
-        {this.renderBooks()}
+        <button onClick={this.props.toggleBookFormModal}>Add New Book</button>
+        {this.state.books.length
+          ? this.state.books.map(book => (
+              <div key= {book.id}>
+                <h2>{book.title}</h2>
+                <p>{book.description}</p>
+                <button onClick={() => this.handleDelete(book.id)}>Delete</button>
+              </div>
+            ))
+          : <p>No Books</p>
+        }
       </div>
     );
   }
