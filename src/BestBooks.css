@@ -1,10 +1,13 @@
-/* BestBooks.css */
+body {
+    background-color: #996515; /* Change background color to golden brown */
+    font-family: Georgia, 'Times New Roman', Times, serif; /* Use serif font */
+}
+
 .best-books-container {
     margin: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    font-family: 'Comic Sans MS', cursive; /* Let's start with Comic Sans MS */
 }
 
 .section-title {
@@ -15,6 +18,8 @@
     text-transform: uppercase;
     letter-spacing: 5px; /* Increase letter spacing */
     text-decoration: underline; /* Add underline */
+    font-weight: bold; /* Make the font bold */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Add shadow */
 }
 
 .book-image {
@@ -50,7 +55,7 @@
     font-size: 24px; /* Decrease font size */
     font-style: normal; /* Reset font style */
     font-weight: bolder; /* Increase font weight */
-    font-family: 'Impact', sans-serif; /* Change font family to Impact */
+    font-family: Georgia, 'Times New Roman', Times, serif; /* Use serif font */
     color: #ff0000; /* Change color to red */
     text-decoration: underline; /* Add underline */
 }
@@ -106,5 +111,5 @@
 .nav-item-enter-active {
     opacity: 1;
     transform: translateY(0);
-    transition: opacity 300ms,
+    transition: opacity 300ms;
 }
