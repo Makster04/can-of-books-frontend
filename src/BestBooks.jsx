@@ -4,7 +4,7 @@ import { Carousel } from 'react-bootstrap';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import './BestBooks.css'; // Import custom CSS file
 
-const SERVER_URL= import.meta.env.VITE_SERVER_URL;
+const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
 class BestBooks extends React.Component {
   constructor(props) {
@@ -31,7 +31,8 @@ class BestBooks extends React.Component {
         });
       })
       .catch(error => console.error('Error fetching books:', error.message));
-};
+  };
+
   // Function to handle deleting a book
   handleDelete = id => {
     axios
@@ -58,18 +59,21 @@ class BestBooks extends React.Component {
       return (
         <Carousel>
           <TransitionGroup>
-            {books.map(book => (
-              <CSSTransition key={book.id} timeout={500} classNames="fade">
-                <Carousel.Item>
-                  <img className="book-image" src={book.imageUrl} alt={book.title} />
-                  <Carousel.Caption className="book-caption">
-                    <h3 className="book-title">{book.title}</h3>
-                    <p className="book-author">By {book.author}</p>
-                    <button onClick={() => this.handleDelete(book.id)}>Delete</button>
-                  </Carousel.Caption>
-                </Carousel.Item>
-              </CSSTransition>
-            ))}
+            {books.map(book => {
+              console.log("Carousel Book ID:", book.id); // Log book IDs for carousel
+              return (
+                <CSSTransition key={book.id} timeout={500} classNames="fade">
+                  <Carousel.Item>
+                    <img className="book-image" src={book.imageUrl} alt={book.title} />
+                    <Carousel.Caption className="book-caption">
+                      <h3 className="book-title">{book.title}</h3>
+                      <p className="book-author">By {book.author}</p>
+                      <button onClick={() => this.handleDelete(book.id)}>Delete</button>
+                    </Carousel.Caption>
+                  </Carousel.Item>
+                </CSSTransition>
+              );
+            })}
           </TransitionGroup>
         </Carousel>
       );
@@ -78,20 +82,25 @@ class BestBooks extends React.Component {
       return <p>Book collection is empty.</p>;
     }
   }
+
   render() {
+    console.log("Books:", this.state.books); // Log books array
     return (
       <div className="best-books-container">
         {/* Render section title */}
         <h2 className="section-title">Best Books</h2>
         <button onClick={this.props.toggleBookFormModal}>Add New Book</button>
         {this.state.books.length
-          ? this.state.books.map(book => (
-              <div key= {book.id}>
-                <h2>{book.title}</h2>
-                <p>{book.description}</p>
-                <button onClick={() => this.handleDelete(book.id)}>Delete</button>
-              </div>
-            ))
+          ? this.state.books.map(book => {
+              console.log("Book ID:", book.id); // Log book IDs for the list
+              return (
+                <div key={book.id}>
+                  <h2>{book.title}</h2>
+                  <p>{book.description}</p>
+                  <button onClick={() => this.handleDelete(book.id)}>Delete</button>
+                </div>
+              );
+            })
           : <p>No Books</p>
         }
       </div>

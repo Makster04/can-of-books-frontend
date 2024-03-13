@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
+const SERVER_URL = import.meta.env.VITE_SERVER_URL;
+
 const BookFormModal = ({ toggleBookFormModal }) => {
   // Define state for form data using useState hook
   const [formData, setFormData] = useState({
@@ -19,7 +21,7 @@ const BookFormModal = ({ toggleBookFormModal }) => {
     e.preventDefault();
     try {
       // Send a POST request to add a new book
-      const response = await axios.post('http://localhost:3001/books', formData);
+      const response = await axios.post(`${SERVER_URL}` + '/books', formData);
       console.log('New Book Added:', response.data);
       // You can update the state or trigger a re-fetch of the book list here
       toggleBookFormModal(); // Close the modal after successful submission
