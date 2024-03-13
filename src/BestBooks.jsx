@@ -1,5 +1,3 @@
-// BestBooks.jsx
-
 import React from 'react';
 import axios from 'axios';
 import { Carousel } from 'react-bootstrap';
@@ -19,10 +17,12 @@ class BestBooks extends React.Component {
     this.fetchBooks();
   }
 
+  // Function to fetch books data from the server
   fetchBooks = () => {
     axios
       .get('http://localhost:3001/books')
       .then(response => {
+        // Update state with fetched books data and set loading to false
         this.setState({
           books: response.data,
           loading: false
@@ -31,6 +31,7 @@ class BestBooks extends React.Component {
       .catch(error => console.error('Error fetching books:', error.message));
   };
 
+  // Function to handle deleting a book
   handleDelete = id => {
     axios
       .delete(`http://localhost:3001/books/${id}`)
@@ -44,12 +45,15 @@ class BestBooks extends React.Component {
       .catch(error => console.error('Error deleting book:', error.message));
   };
 
+  // Function to render the books carousel
   renderBooks() {
     const { books, loading } = this.state;
 
     if (loading) {
+      // Show loading message while fetching books
       return <p>Loading...</p>;
     } else if (books.length > 0) {
+      // Render the carousel with books data if available
       return (
         <Carousel>
           <TransitionGroup>
@@ -69,6 +73,7 @@ class BestBooks extends React.Component {
         </Carousel>
       );
     } else {
+      // Show message if there are no books available
       return <p>Book collection is empty.</p>;
     }
   }
@@ -76,7 +81,9 @@ class BestBooks extends React.Component {
   render() {
     return (
       <div className="best-books-container">
+        {/* Render section title */}
         <h2 className="section-title">Best Books</h2>
+        {/* Render the books carousel */}
         {this.renderBooks()}
       </div>
     );
