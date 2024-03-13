@@ -1,17 +1,24 @@
+// Header.jsx
 import React from 'react';
-import { Navbar, NavItem } from 'react-bootstrap';
+import { Navbar, Nav } from 'react-bootstrap';
 import { Link } from "react-router-dom";
-import 'bootstrap/dist/css/bootstrap.min.css';
-
-
+import { CSSTransition } from 'react-transition-group';
+import './BestBooks.css'; // Import custom CSS file
 
 class Header extends React.Component {
   render() {
     return (
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-        <Navbar.Brand>My Favorite Books</Navbar.Brand>
-        <NavItem><Link to="/" className="nav-link">Home</Link></NavItem>
-        {/* PLACEHOLDER: render a navigation link to the about page */}
+        <Navbar.Brand style={{ color: 'whitesmoke' }}>My Favorite Books</Navbar.Brand> {/* Change brand color */}
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+        <Navbar.Collapse id="responsive-navbar-nav">
+          <Nav className="mr-auto">
+            <CSSTransition timeout={300} classNames="nav-item">
+              <Link to="/" className="nav-link">Home</Link>
+            </CSSTransition>
+            {/* Placeholder for other navigation links */}
+          </Nav>
+        </Navbar.Collapse>
       </Navbar>
     )
   }
