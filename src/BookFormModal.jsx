@@ -30,8 +30,8 @@ const BookFormModal = ({ toggleBookFormModal }) => {
   };
 
   return (
-    <div className="modal">
-      <div className="modal-content">
+    <div>
+      <div>
         {/* Close button to toggle the visibility of the modal */}
         <span className="close" onClick={toggleBookFormModal}>&times;</span>
         <h2>Add New Book</h2>

@@ -27,6 +27,7 @@ class App extends React.Component {
   };
 
   render() {
+    console.log('HERE IS BEST BOOKS STATE', this.state);
     return (
       <>
         <Router>
@@ -45,7 +46,7 @@ class App extends React.Component {
           </div>
           <Footer />
         </Router>
-        {this.state.showBookFormModal && <BookFormModal toggleBookFormModal={this.toggleBookFormModal} />}
+        {this.state.showBookFormModal ? <BookFormModal show={this.state.showBookFormModal} toggleBookFormModal={this.toggleBookFormModal}/> : null}
       </>
     )
   }
