@@ -12,6 +12,15 @@ function Home() {
   );
 }
 
+function About() {
+  return (
+    <div>
+      <h2>About Page</h2>
+      <p>This is the About page content.</p>
+    </div>
+  );
+}
+
 const root = createRoot(document.getElementById('root')); // Using createRoot from react-dom/client
 root.render(
   <React.StrictMode>
