@@ -4,14 +4,15 @@ import { Carousel } from 'react-bootstrap';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import './BestBooks.css'; // Import custom CSS file
 
-const SERVER_URL = import.meta.env.VITE_SERVER_URL;
+const SERVER_URL = import.meta.env.VITE_SERVER_URL; // Use process.env for environment variables
 
 class BestBooks extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       books: [],
-      loading: true
+      loading: true,
+      error: null // Add error state
     };
   }
 
@@ -19,90 +20,78 @@ class BestBooks extends React.Component {
     this.fetchBooks();
   }
 
-  // Function to fetch books data from the server
   fetchBooks = () => {
     axios
-      .get(`${SERVER_URL}/books`) // Use template literals to include the SERVER_URL
+      .get(`${SERVER_URL}/books`)
       .then(response => {
-        // Update state with fetched books data and set loading to false
         this.setState({
           books: response.data,
-          loading: false
+          loading: false,
+          error: null // Reset error state on successful fetch
         });
       })
-      .catch(error => console.error('Error fetching books:', error.message));
+      .catch(error => {
+        this.setState({
+          loading: false,
+          error: 'Error fetching books. Please try again.' // Update error state
+        });
+      });
   };
 
-  // Function to handle deleting a book
   handleDelete = id => {
     axios
       .delete(`${SERVER_URL}/books/${id}`)
       .then(response => {
         console.log(response.data.message);
-        // Update state to remove the deleted book
         this.setState(prevState => ({
-          books: prevState.books.filter(book => book.id !== id)
+          books: prevState.books.filter(book => book.id !== id),
+          error: null // Reset error state on successful delete
         }));
       })
-      .catch(error => console.error('Error deleting book:', error.message));
+      .catch(error => {
+        console.error('Error deleting book:', error);
+        this.setState({
+          error: 'Error deleting book. Please try again.' // Update error state
+        });
+      });
   };
 
-  // Function to render the books carousel
   renderBooks() {
-    const { books, loading } = this.state;
-    console.log("RENDERBOOKS METHOD, Books and loading", books, loading);
+    const { books, loading, error } = this.state;
     if (loading) {
-      // Show loading message while fetching books
       return <p>Loading...</p>;
+    } else if (error) {
+      return <p>{error}</p>; // Render error message
     } else if (books.length > 0) {
-      // Render the carousel with books data if available
       return (
         <Carousel>
           <TransitionGroup>
-            {books.map(book => {
-              console.log("Carousel Book ID:", book.id); // Log book IDs for carousel
-              return (
-                <CSSTransition key={book.id} timeout={500} classNames="fade">
-                  <Carousel.Item>
-                    <img className="book-image" src={book.imageUrl} alt={book.title} />
-                    <Carousel.Caption className="book-caption">
-                      <h3 className="book-title">{book.title}</h3>
-                      <p className="book-author">By {book.author}</p>
-                      <button onClick={() => this.handleDelete(book.id)}>Delete</button>
-                    </Carousel.Caption>
-                  </Carousel.Item>
-                </CSSTransition>
-              );
-            })}
+            {books.map(book => (
+              <CSSTransition key={book.id} timeout={500} classNames="fade">
+                <Carousel.Item>
+                  <img className="book-image" src={book.imageUrl} alt={book.title} />
+                  <Carousel.Caption className="book-caption">
+                    <h3 className="book-title">{book.title}</h3>
+                    <p className="book-author">By {book.author}</p>
+                    <button onClick={() => this.handleDelete(book.id)}>Delete</button>
+                  </Carousel.Caption>
+                </Carousel.Item>
+              </CSSTransition>
+            ))}
           </TransitionGroup>
         </Carousel>
       );
     } else {
-      // Show message if there are no books available
       return <p>Book collection is empty.</p>;
     }
   }
 
   render() {
-    console.log("Books:", this.state.books); // Log books array
     return (
       <div className="best-books-container">
-        {/* Render section title */}
         <h2 className="section-title">Best Books</h2>
         <button onClick={this.props.toggleBookFormModal}>Add New Book</button>
-        {this.state.books.length
-          ? this.state.books.map(book => {
-              console.log("Book ID:", book.id); // Log book IDs for the list
-              return (
-                <div key={book.id}>
-                  <h2>{book.title}</h2>
-                  <p>{book.description}</p>
-                  <button onClick={() => this.handleDelete(book.id)}>Delete</button>
-                </div>
-              );
-            })
-          : <p>No Books</p>
-        }
+        {this.renderBooks()}
       </div>
     );
   }
