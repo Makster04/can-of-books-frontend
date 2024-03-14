@@ -11,6 +11,9 @@ import {
   Route
 } from "react-router-dom";
 
+const SERVER_URL = import.meta.env.VITE_SERVER_URL; // Use process.env for environment variables
+
+
 class App extends React.Component {
   constructor(props) {
     super(props);
